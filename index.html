@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konbit News - Interactive AI News Aggregator</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Supabase client CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body class="dark-theme">
+  <!-- Main Glassmorphic Container -->
+  <div class="app-container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="logo-area">
+        <img src="DesignGuidelines/logo.png" alt="Konbit Logo" class="brand-logo">
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" id="btn-feed" onclick="switchTab('feed')">
+          <i data-lucide="layout-grid"></i>
+          <span>Feed</span>
+        </button>
+        <button class="nav-item" id="btn-saved" onclick="switchTab('saved')">
+          <i data-lucide="bookmark"></i>
+          <span>Saved Articles</span>
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+          <span class="theme-label">Theme Mode</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Top Header -->
+      <header class="header">
+        <div class="header-welcome">
+          <h1 class="h2-heading">AI News Aggregator</h1>
+          <p class="subtext">Real-time updates from Ben's Bites, The AI Rundown, Reddit & more.</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-primary" id="btn-refresh" onclick="triggerScrape()">
+            <i data-lucide="refresh-cw" class="spin-icon"></i>
+            <span>Refresh Feed</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Dashboard Statistics (Premium Cards) -->
+      <section class="metrics-grid">
+        <div class="metric-card glass-card">
+          <div class="metric-icon primary-glow">
+            <i data-lucide="newspaper"></i>
+          </div>
+          <div class="metric-info">
+            <span class="metric-value" id="stat-total-articles">0</span>
+            <span class="metric-label">Total Articles</span>
+          </div>
+        </div>
+        <div class="metric-card glass-card">
+          <div class="metric-icon secondary-glow">
+            <i data-lucide="star"></i>
+          </div>
+          <div class="metric-info">
+            <span class="metric-value" id="stat-saved-articles">0</span>
+            <span class="metric-label">Saved Articles</span>
+          </div>
+        </div>
+        <div class="metric-card glass-card">
+          <div class="metric-icon accent-glow">
+            <i data-lucide="database"></i>
+          </div>
+          <div class="metric-info">
+            <span class="metric-value" id="stat-sync-status">Connected</span>
+            <span class="metric-label">Supabase Sync</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filtering & Source Selector Area -->
+      <section class="controls-section glass-card">
+        <!-- Search bar -->
+        <div class="search-box">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="text" id="search-input" placeholder="Search news and articles..." oninput="handleFilterChange()">
+        </div>
+
+        <!-- Category selector (pill filters) -->
+        <div class="category-filters">
+          <button class="category-pill active" onclick="setCategory('All')">All</button>
+          <button class="category-pill" onclick="setCategory('News')">News</button>
+          <button class="category-pill" onclick="setCategory('Tools')">Tools</button>
+          <button class="category-pill" onclick="setCategory('Research')">Research</button>
+          <button class="category-pill" onclick="setCategory('Discussion')">Discussion</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Osiris Balonga Source Selector Component -->
+        <div class="source-selector-container">
+          <div class="source-selector-label">Filtered Sources</div>
+          <div class="source-selector-wrapper" id="source-selector-root">
+            <!-- Active sources list -->
+            <div class="active-sources-list" id="active-sources-pills">
+              <!-- Dynamically populated avatar pills -->
+            </div>
+
+            <!-- "+" Add source button -->
+            <div class="add-source-wrapper">
+              <button class="btn-add-source" onclick="toggleSourceDropdown(event)">
+                <i data-lucide="plus"></i>
+                <span>Filter</span>
+              </button>
+
+              <!-- Glassmorphic Search Dropdown -->
+              <div class="source-dropdown glass-card hidden" id="source-dropdown-panel">
+                <div class="dropdown-header">
+                  <i data-lucide="search" class="dropdown-search-icon"></i>
+                  <input type="text" id="dropdown-search-input" placeholder="Search sources..." oninput="filterDropdownSources()">
+                </div>
+                <div class="dropdown-list" id="dropdown-sources-list">
+                  <!-- Dynamically populated checkbox rows -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Articles Card Grid -->
+      <section class="articles-grid" id="articles-container">
+        <!-- Dynamically pre-rendered skeletons / loading state -->
+        <div class="skeleton-card glass-card"></div>
+        <div class="skeleton-card glass-card"></div>
+        <div class="skeleton-card glass-card"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+Colors
+Primary:
+#0D6EFD
+Secondary:
+#F69434
+Accent:
+#1A9804
+Background:
+#FFFFFF
+Text Primary:
+#1A9804
+Link:
+#1A9804
+Fonts
+Plus Jakarta Sans(body)
+Typography
+primary: Plus Jakarta Sans
+heading: Plus Jakarta Sans
+h1: 56px
+h2: 44px
+body: 18px

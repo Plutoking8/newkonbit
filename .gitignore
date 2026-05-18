@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+data/failed_sync.json
+.tempmediaStorage/
+.system_generated/
+browser/
+node_modules/
+dist/
+.DS_Store
