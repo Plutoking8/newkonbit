@@ -3,9 +3,11 @@
 // ==============================================================================
 
 const SUPABASE_URL = "https://usoxofesrriisecyhhfn.supabase.co";
-const SUPABASE_KEY = "sb_publishable_XKE7i16Gz0fa5zg23vX3kQ_juY0dY_Q";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVzb3hvZmVzcnJpaXNlY3loaGZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg3NTQ1MDksImV4cCI6MjA5NDMzMDUwOX0.OPdaX3sXxQ9UDMn5OW7QXl_9JfX9a2oJUvT4w9MVei8";
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+
 
 // ==============================================================================
 // 2. Global State Management

@@ -33,7 +33,8 @@ def load_env():
 
 ENV = load_env()
 SUPABASE_URL = ENV.get("SUPABASE_URL", "https://usoxofesrriisecyhhfn.supabase.co")
-SUPABASE_KEY = ENV.get("SUPABASE_KEY", "sb_publishable_XKE7i16Gz0fa5zg23vX3kQ_juY0dY_Q")
+SUPABASE_KEY = ENV.get("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVzb3hvZmVzcnJpaXNlY3loaGZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg3NTQ1MDksImV4cCI6MjA5NDMzMDUwOX0.OPdaX3sXxQ9UDMn5OW7QXl_9JfX9a2oJUvT4w9MVei8")
+
 
 def clean_url(url):
     """Strip all UTM/tracking search parameters from the URL."""
